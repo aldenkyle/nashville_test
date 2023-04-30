@@ -24,8 +24,10 @@ function showAllReports() {
 }
 
 function mapInitialization(reports) {
+
+
     var mapOptions = {
-        mapTypeId : google.maps.MapTypeId.ROADMAP, // Set the type of Map
+        mapId : "2ef0a683384d2e45", // Set the type of Map
     };
 
 
@@ -50,17 +52,18 @@ function mapInitialization(reports) {
     });
 
 
-    var bounds = new google.maps.LatLngBounds ();
+    var bounds = new google.maps.LatLngBounds (
+    );
 
     //create the icon constructors
     var icons = {
         historical_marker: {
-            url: 'img/historical.png',
-            scaledSize: new google.maps.Size(20, 20)
+            url: 'img/historical-brown.png',
+            scaledSize: new google.maps.Size(30, 23)
         },
         art_in_public_places: {
-            url: 'img/art.png',
-            scaledSize: new google.maps.Size(30, 30)
+            url: 'img/art-pink.png',
+            scaledSize: new google.maps.Size(45, 45)
         }
     };
 
@@ -74,14 +77,16 @@ function mapInitialization(reports) {
         // Create the infoWindow content
         var contentStr = '<h4>Site Details</h4><hr>';
         //pulled this out while I was setting up the map
-        contentStr += '<p><b>' + 'Title' + ':</b>&nbsp' + e['title'] + '</p>';
+        contentStr += '<p><b>' + 'Site Name' + ':</b>&nbsp' + e['title'] + '</p>';
         contentStr += '<p><b>' + 'Description' + ':</b>&nbsp' + e['description'] +
             '</p>';
         contentStr += '<p><b>' + 'Address' + ':</b>&nbsp' + e['location'] +
             '</p>';
         contentStr += '<p><b>' + 'Type' + ':</b>&nbsp' + e['site_type'] +
             '</p>';
-        contentStr += '<p><b>' + 'Average Review' + ':</b>&nbsp' + e['average_review'] + ':</b>&nbsp' + e['most_recent_comment'] +
+        contentStr += '<p><b>' + 'Average Review' + ':</b>&nbsp' + e['average_review'] + ':</b>&nbsp out of ' + e['total_reviews'] +
+            ' reviews.</p>';
+        contentStr += '<p><b>' + 'Most Recent Comment' + ':</b>&nbsp'+ e['most_recent_comment'] +
             '</p>';
 
         // Create the marker
@@ -109,8 +114,17 @@ function mapInitialization(reports) {
         });
 
     });
+    console.log(bounds.Ua.hi);
+    if (bounds.Ua.hi != -1) {
+        map.fitBounds (bounds);
+    } else {
+        var latlng = new google.maps.LatLng(36.11502267719292, -86.83868336541748);
+        bounds.extend(latlng);
+        var latlng2 = new google.maps.LatLng(36.219236356179856, -86.70581745965576);
+        bounds.extend(latlng2);
+        map.fitBounds (bounds);
 
-    map.fitBounds (bounds);
+    }
 
 }
 
