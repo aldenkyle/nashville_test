@@ -33,3 +33,14 @@ form {
     font-weight: bold;
 
 }
+
+.legend {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.source {
+    padding-top: 250px;
+}
+
+

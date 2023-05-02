@@ -58,14 +58,26 @@ function mapInitialization(reports) {
     //create the icon constructors
     var icons = {
         historical_marker: {
-            url: 'img/historical-brown.png',
-            scaledSize: new google.maps.Size(30, 23)
+// <<<<<<< Updated upstream
+//             url: 'img/historical-brown.png',
+//             scaledSize: new google.maps.Size(30, 23)
+//         },
+//         art_in_public_places: {
+//             url: 'img/art-pink.png',
+//             scaledSize: new google.maps.Size(45, 45)
+// =======
+            url: 'img/brown_circle.png',
+            scaledSize: new google.maps.Size(20, 20)
         },
         art_in_public_places: {
-            url: 'img/art-pink.png',
-            scaledSize: new google.maps.Size(45, 45)
+            url: 'img/blue_star.png',
+            scaledSize: new google.maps.Size(25, 25)
+// >>>>>>> Stashed changes
         }
     };
+
+
+
 
     $.each(reports, function(i, e) {
         var long = Number(e['longitude']);
@@ -82,8 +94,14 @@ function mapInitialization(reports) {
             '</p>';
         contentStr += '<p><b>' + 'Address' + ':</b>&nbsp' + e['location'] +
             '</p>';
-        contentStr += '<p><b>' + 'Type' + ':</b>&nbsp' + e['site_type'] +
-            '</p>';
+        //else if for report types
+        if (e['site_type'] == 'art_in_public_places') {
+            contentStr += '<p><b>' + 'Type' + ':</b>&nbsp' + 'Public Art' +
+                '</p>'
+        } else if (e['site_type'] == 'historical_marker'){
+            contentStr += '<p><b>' + 'Type' + ':</b>&nbsp' + 'Historical Marker' +
+                '</p>'
+        };
         contentStr += '<p><b>' + 'Average Review' + ':</b>&nbsp' + e['average_review'] + ':</b>&nbsp out of ' + e['total_reviews'] +
             ' reviews.</p>';
         contentStr += '<p><b>' + 'Most Recent Comment' + ':</b>&nbsp'+ e['most_recent_comment'] +

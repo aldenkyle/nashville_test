@@ -9,7 +9,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.Filter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -77,10 +76,12 @@ public class HttpServlet extends jakarta.servlet.http.HttpServlet {
 
         // 1. create report
         String site_name = request.getParameter("sN");
+        site_name = site_name.replace("'", "''");
         String first_name = request.getParameter("fN");
         String last_name = request.getParameter("lN");
         String stars = request.getParameter("stars");
         String comment = request.getParameter("message");
+        comment = comment.replace("'", "''");
         String age = request.getParameter("age");
         sql = "insert into reviews (fN, lN, site_name, comment, age, stars_text, review_time) " +
                     "values ('" + first_name + "','" + last_name + "','" + site_name + "','"
